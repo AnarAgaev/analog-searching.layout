@@ -64,10 +64,16 @@ html(lang="ru")
                             include components/warning/warning
                             include components/uploading/uploading
 
-                .asd__wrap
+                .asd__wrap#results.hidden
                     include components/res-msg/res-msg
                     include components/results/results
 
+                .modal.hidden#asdModal
+                    .modal__body
+                        h3.modal__title
+                        p.modal__text
+                        span.modal__line
+                        button.modal__close(type="button") Закрыть
 
         if process.env.NODE_ENV === 'dev'
             script(src='js/main.js' defer)

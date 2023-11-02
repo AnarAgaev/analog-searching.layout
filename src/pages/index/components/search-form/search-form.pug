@@ -2,18 +2,18 @@ form(action="").asd__form
     .asd__form-group
         label.asd__label.visible(data-type-target="code")
             mark Укажите Артикул товара
-            input(placeholder="vendor code из фида")
+            input(placeholder="vendor code из фида")#asdInputCode
 
         label.asd__label(data-type-target="url")
             mark Укажите URL товара
-            input(placeholder="https://example.com")
+            input(placeholder="https://example.com")#asdInputUrl
 
         .asd__label(data-type-target="image")
             mark Загрузите фото товара
 
             .asd__file-input
-                input#asd-custom-file-input.invisible(type='file' name="image" accept=".jpg, .jpeg, .png, .webp")
-                label(for='asd-custom-file-input') Выберите файл
+                input#asdInputfile.invisible(type='file' name="image" accept=".jpg, .jpeg, .png, .webp")
+                label(for='asdInputfile') Выберите файл
                 span(data-default-value="Файл не выбран") Файл не выбран
 
         // Отключить бэйджим можно с помощью класса .invisible
@@ -100,5 +100,5 @@ form(action="").asd__form
                                 span.value Торшеры
 
     .asd__buttons-wrap
-        button.btn.btn_block.btn_base(type="button") Искать
+        button.btn.btn_block.btn_base#searchAnalogButton(type="button") Искать
         button.btn.btn_block.btn_reset(type="reset") Сбросить

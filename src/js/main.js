@@ -1,3 +1,27 @@
+const hideAsdModal = () => {
+    const modal = document.getElementById('asdModal')
+    modal.classList.remove('visible')
+
+    setTimeout(() => {
+        modal.classList.add('hidden')
+    }, 100)
+}
+
+const showAsdModal = (title, text) => {
+    const modal = document.getElementById('asdModal')
+    const close = modal.querySelector('.modal__close')
+
+    modal.querySelector('.modal__title').innerText = title
+    modal.querySelector('.modal__text').innerText = text
+    modal.classList.remove('hidden')
+
+    setTimeout(() => {
+        modal.classList.add('visible')
+    }, 100)
+
+    close.addEventListener('click', hideAsdModal)
+}
+
 const initTypeTubs = () => {
     const tabs = Array.from(document.querySelectorAll('.asd [data-type]'))
     const targets = Array.from(document.querySelectorAll('.asd [data-type-target]'))
@@ -88,7 +112,7 @@ const initResetForms = () => {
 }
 
 const initCustomInputFile = () => {
-    const fileInput = document.getElementById('asd-custom-file-input')
+    const fileInput = document.getElementById('asdInputfile')
     const fileName = document.querySelector('.asd__file-input span')
 
     fileInput.addEventListener('change', function() {
@@ -116,11 +140,21 @@ const initToggleUseFeed = () => {
     })
 }
 
-const initAddUserFeed = () => {
+const initUploadUserFid = () => {
     const btn = document.getElementById('addUserFeedButton')
     const statuses = Array.from(document.querySelectorAll('.asd .uploading__item'))
+    const input = document.querySelector('.asd__feed-selector input')
+    const modalTitle = btn.dataset.modalTitle
+    const modalText = btn.dataset.modalText
 
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+        if (input.value === '') {
+            e.stopPropagation()
+            e.preventDefault()
+            showAsdModal(modalTitle, modalText)
+            return
+        }
+
         statuses.forEach((el, idx) => {
             setInterval(() => {
                 el.classList.remove('hidden')
@@ -158,6 +192,69 @@ const initToggleColumns = () => {
     })
 }
 
+const asdShowResults = () => {
+    const results = document.getElementById('results')
+
+    results.classList.remove('hidden')
+
+}
+
+const initSearchAnalogButton = () => {
+    const btn = document.getElementById('searchAnalogButton')
+
+    const checkCode = () => {
+        const input = document.getElementById('asdInputCode')
+        if (input.value === '') {
+            showAsdModal('Ошибка', 'Вы не указали Артикул товара')
+            return
+        }
+        asdShowResults()
+    }
+
+    const checkUrl = () => {
+        const input = document.getElementById('asdInputUrl')
+        if (input.value === '') {
+            showAsdModal('Ошибка', 'Вы не указали URL товара')
+            return
+        }
+        asdShowResults()
+    }
+
+    const checkiImage = () => {
+        const input = document.getElementById('asdInputfile')
+
+        if(input.files.length === 0) {
+            if (input.value === '') {
+                showAsdModal('Ошибка', 'Вы не добавили изображение для поиска')
+                return
+            }
+            asdShowResults()
+        }
+    }
+
+    btn.addEventListener('click', () => {
+        const activeSearch = document.querySelector('.asd [data-type].active')
+        const activeSearchId = activeSearch.dataset.type
+        let cehckingResult = false
+
+        switch (activeSearchId) {
+            case 'code':
+                cehckingResult = checkCode()
+                break
+            case 'url':
+                cehckingResult = checkUrl()
+                break
+            case 'image':
+                cehckingResult = checkiImage()
+                break
+        }
+
+        if (cehckingResult) {
+
+        }
+    })
+}
+
 window.addEventListener('load', () => {
     initTypeTubs()
     initDeleteCurrent()
@@ -165,6 +262,7 @@ window.addEventListener('load', () => {
     initResetForms()
     initCustomInputFile()
     initToggleUseFeed()
-    initAddUserFeed()
+    initUploadUserFid()
     initToggleColumns()
+    initSearchAnalogButton()
 })
