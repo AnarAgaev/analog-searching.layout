@@ -6,7 +6,7 @@
         flex-direction: column;
         gap: var(--base-offset);
         margin-top: calc(var(--base-offset) * 2);
-        margin-bottom: -100%;
+        margin-bottom: calc(var(--base-offset) * 4);
 
         &__item {
             display: flex;

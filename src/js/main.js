@@ -15,9 +15,14 @@ const initTypeTubs = () => {
     })
 
     function handleTabClick() {
+        const codeBadge = document.querySelector('.asd__res-count')
         const target = this.dataset.type
         const targetNode = document
             .querySelector(`.asd [data-type-target="${target}"]`)
+
+        target === 'image'
+            ? codeBadge.classList.add('hidden')
+            : codeBadge.classList.remove('hidden')
 
         resetTabs()
         resetTargets()
@@ -82,9 +87,84 @@ const initResetForms = () => {
     })
 }
 
+const initCustomInputFile = () => {
+    const fileInput = document.getElementById('asd-custom-file-input')
+    const fileName = document.querySelector('.asd__file-input span')
+
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0]
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.webp)$/i
+
+        if (allowedExtensions.test(file.name)) {
+            fileName.textContent = file.name
+        } else {
+            fileName.textContent = 'Неверный формат файла'
+        }
+    })
+}
+
+const initToggleUseFeed = () => {
+    const button = document.querySelector('.asd__feed-selector .points')
+    const selector = button.closest('.asd__feed-selector')
+    const warning = document.querySelector('.warning')
+    const uploading = document.querySelector('.uploading')
+
+    button.addEventListener('click', function() {
+        selector.classList.toggle('collapsed')
+        warning.classList.toggle('hidden')
+        uploading.classList.toggle('hidden')
+    })
+}
+
+const initAddUserFeed = () => {
+    const btn = document.getElementById('addUserFeedButton')
+    const statuses = Array.from(document.querySelectorAll('.asd .uploading__item'))
+
+    btn.addEventListener('click', () => {
+        statuses.forEach((el, idx) => {
+            setInterval(() => {
+                el.classList.remove('hidden')
+            }, idx * 1000)
+        })
+
+        statuses.forEach((el, idx) => {
+            setInterval(() => {
+                const check = el.querySelector('.uploading__check')
+                check.classList.remove('uploading__check_loading')
+                check.classList.add('uploading__check_checked')
+            }, idx * 1000 + 700)
+        })
+    })
+}
+
+const initToggleColumns = () => {
+    const btns = Array.from(document.querySelectorAll('.asd [data-target-selector]'))
+    const drops = Array.from(document.querySelectorAll('.asd .asd__column_toggle'))
+    const tabs = document.querySelector('.asd__tubs-types')
+
+    btns.forEach(el => {
+        el.addEventListener('click', function() {
+            const targetSelector = this.dataset.targetSelector
+            const target = document.querySelector(targetSelector)
+
+            btns.forEach(el => el.classList.remove('active'))
+            drops.forEach(el => el.classList.remove('active'))
+
+            tabs.classList.toggle('hidden')
+
+            el.classList.add('active')
+            target.classList.add('active')
+        })
+    })
+}
+
 window.addEventListener('load', () => {
     initTypeTubs()
     initDeleteCurrent()
     initDroppingSelects()
     initResetForms()
+    initCustomInputFile()
+    initToggleUseFeed()
+    initAddUserFeed()
+    initToggleColumns()
 })

@@ -21,8 +21,6 @@ html(lang="ru")
             link(rel='preload', href='css/main.min.css', as='style')
             link(rel='stylesheet', href='css/main.min.css')
 
-
-
     // style не переносим!
     style.
         .container {
@@ -31,40 +29,43 @@ html(lang="ru")
             margin: 0 auto;
         }
 
+        html, body {
+            margin: 20px 0;
+            padding: 0;
+        }
+
     body
         .container
             .asd
                 .asd__wrap
                     h1.asd__title Попробовать поиск товара по фотографии
 
-                    .asd__tubs-types
+                    .asd__tubs-columns
+                        button(type="button" data-target-selector="#searchForm").active Указать параметы
+                        button(type="button" data-target-selector="#feedForm") Добавить свою выгрузку
+
+                    .asd__tubs-types#tubsTypes
                         button.active(type="button" data-type="code") Поиск по артикулу
                         button(type="button" data-type="url") Поиск по url
                         button(type="button" data-type="image") Поиск по фото
 
                     .asd__container
-                        .asd__column
+                        .asd__column.asd__column_toggle#searchForm.active
                             include components/search-form/search-form
 
-                        .asd__column
+                        .asd__column.asd__column_toggle#feedForm
                             include components/feed-form/feed-form
 
-                    include components/res-msg/res-msg
-
                     .asd__container
-                        .asd__column
-                            include components/info/info
+                        .asd__column#examples
+                            include components/examples/examples
 
-                        .asd__column
+                        .asd__column#warning
                             include components/warning/warning
                             include components/uploading/uploading
 
-                    .asd__container
-                        .asd__column
-                            include components/examples/examples
-
                 .asd__wrap
-                    h1.asd__title Результаты поиска
+                    include components/res-msg/res-msg
                     include components/results/results
 
 

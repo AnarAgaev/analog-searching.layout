@@ -1,16 +1,17 @@
-ul.uploading
-    li.uploading__item
+ul.uploading.hidden
+    li.uploading__item.hidden
+        // Для переключения классов используем .uploading__check_loading и .uploading__check_checked
         span.uploading__text Анализ корректности формата файла
-        span.uploading__check.uploading__check_checked
-    li.uploading__item
+        span.uploading__check.uploading__check_loading
+    li.uploading__item.hidden
         span.uploading__text Скачивание изображений
         span.uploading__check.uploading__check_loading
-    li.uploading__item
+    li.uploading__item.hidden
         span.uploading__text Создание Кропов (индексов изображений)
         span.uploading__check.uploading__check_loading
-    li.uploading__item
+    li.uploading__item.hidden
         span.uploading__text Добавляем в поисковую базу
         span.uploading__check.uploading__check_loading
-    li.uploading__item
+    li.uploading__item.hidden
         span.uploading__text Ура! Можно попробовать поиск
         span.uploading__check.uploading__check_loading

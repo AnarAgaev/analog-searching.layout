@@ -42,8 +42,14 @@ form(action="").asd__form
                                 span.value swgshop.ru
 
 
-    label.asd__label.asd__label_text
+    label.asd__label.asd__feed-selector.collapsed
         mark Добавить свою выгрузку
+            span.points(type="button")
+                span
+                span
+                span
         input(placeholder="URL фида в формате YML")
 
-    button.btn.btn_lite(type="button") Добавить
+    button.btn.btn_lite#addUserFeedButton(type="button") Добавить
+
+    include ../info/info
