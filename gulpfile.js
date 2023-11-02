@@ -23,37 +23,6 @@ const setEnv = (cb) => {
     cb();
 }
 
-const devMocksData = () => {
-    return src('./src/mocks/**/*')
-        .pipe(dest('build/mocks'))
-        .pipe(browserSync.stream())
-}
-
-const devVendorCss = () => {
-    return src('./src/vendor/scss/**/*.scss')
-        .pipe(plumber({
-            errorHandler: notify.onError( function(err){
-                return {
-                    title: 'Scss styles Error',
-                    message: err.message
-                }
-            })
-        }))
-        .pipe(sourcemaps.init())
-        .pipe(sass.sync().on('error', sass.logError))
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(rename({
-            basename: 'vendor'
-        }))
-        .pipe(sourcemaps.write())
-        .pipe(plumber.stop())
-        .pipe(dest('build/css'))
-        .pipe(browserSync.stream())
-}
-
 const devCommonCss = () => {
     return src('./src/scss/**/*.scss')
         .pipe(plumber({
@@ -79,59 +48,8 @@ const devCommonCss = () => {
         .pipe(browserSync.stream())
 }
 
-const devCustomCss = () => {
-    return src('./src/pages/**/style.scss')
-        .pipe(plumber({
-            errorHandler: notify.onError( function(err){
-                return {
-                    title: 'Scss styles Error',
-                    message: err.message
-                }
-            })
-        }))
-        .pipe(sourcemaps.init())
-        .pipe(sass.sync().on('error', sass.logError))
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(rename(fileObj => {
-            fileObj.basename = fileObj.dirname;
-            fileObj.dirname = '';
-        }))
-        .pipe(sourcemaps.write())
-        .pipe(plumber.stop())
-        .pipe(dest('build/css/pages'))
-        .pipe(browserSync.stream())
-}
-
-const devVendorJs = () => {
-    return src('./src/vendor/js/**/*.js')
-        .pipe(plumber({
-                errorHandler: notify.onError( function(err){
-                    return {
-                        title: 'JS Error',
-                        message: err.message
-                    }
-                })
-            }))
-        .pipe(sourcemaps.init())
-        .pipe(concat('vendor.js'))
-        .pipe(sourcemaps.write())
-        .pipe(plumber.stop())
-        .pipe(dest('build/js'))
-        .pipe(browserSync.stream())
-}
-
 const devCommonJs = () => {
-    return src([
-            './src/js/utils/**/*.js',
-            './src/components/**/*.js',
-            '!./src/components/product-component/**/*.js',
-            './src/template/**/*.js',
-            './src/js/main.js',
-            './src/js/**/*.js'
-        ])
+    return src('./src/js/main.js')
         .pipe(plumber({
                 errorHandler: notify.onError( function(err){
                     return {
@@ -146,30 +64,6 @@ const devCommonJs = () => {
         .pipe(sourcemaps.write())
         .pipe(plumber.stop())
         .pipe(dest('build/js'))
-        .pipe(browserSync.stream())
-}
-
-const devCustomJs = () => {
-    return src('./src/pages/**/script.js')
-        .pipe(plumber({
-                errorHandler: notify.onError( function(err){
-                    return {
-                        title: 'JS Error',
-                        message: err.message
-                    }
-                })
-            }))
-        .pipe(sourcemaps.init())
-        .pipe(include())
-            .on('error', console.log)
-        .pipe(rename(fileObj => {
-            fileObj.basename = fileObj.dirname;
-            fileObj.dirname = '';
-        }))
-        // .pipe(insert.prepend("'use strict';\n\n"))
-        .pipe(sourcemaps.write())
-        .pipe(plumber.stop())
-        .pipe(dest('build/js/pages'))
         .pipe(browserSync.stream())
 }
 
@@ -197,32 +91,6 @@ const devHmtl = () => {
 }
 
 // Task functions for build mode
-const buildMocksData = () => {
-    return src('./src/mocks/**/*')
-        .pipe(dest('build/mocks'))
-}
-
-const buildVendorCss = () => {
-    return src('./src/vendor/scss/**/*.scss')
-        .pipe(sass.sync().on('error', sass.logError))
-        .pipe(mmq({
-            log: true,
-            skipMQErrors: true
-        }))
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(sass.sync({
-            outputStyle: 'compressed'
-        }))
-        .pipe(rename({
-            basename: 'vendor',
-            suffix: '.min'
-        }))
-        .pipe(dest('build/css'))
-}
-
 const buildCommonCss = () => {
     return src('./src/scss/**/*.scss')
         .pipe(sass.sync().on('error', sass.logError))
@@ -244,51 +112,8 @@ const buildCommonCss = () => {
         .pipe(dest('build/css'))
 }
 
-const buildCustomCss = () => {
-    return src('./src/pages/**/style.scss')
-        .pipe(sass.sync().on('error', sass.logError))
-        // .pipe(mmq({
-        //     log: true,
-        //     skipMQErrors: true
-        // }))
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(sass.sync({
-            outputStyle: 'compressed'
-        }))
-        .pipe(rename(fileObj => {
-            fileObj.basename = fileObj.dirname + '.min';
-            fileObj.dirname = '';
-        }))
-        .pipe(dest('build/css/pages'))
-}
-
-const buildVendorJs = () => {
-    return src('./src/vendor/js/**/*.js')
-        .pipe(concat('vendor.js'))
-        // .pipe(babel({
-        //     presets: [
-        //         ['@babel/preset-env']
-        //     ]
-        // }))
-        .pipe(uglify())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(dest('build/js'))
-}
-
 const buildCommonJs = () => {
-    return src([
-            './src/js/utils/**/*.js',
-            './src/components/**/*.js',
-            '!./src/components/product-component/**/*.js',
-            './src/template/**/*.js',
-            './src/js/main.js',
-            './src/js/**/*.js'
-        ])
+    return src('./src/js/main.js')
         .pipe(concat('main.js'))
         .pipe(babel({
             compact: false,
@@ -301,24 +126,6 @@ const buildCommonJs = () => {
             suffix: '.min'
         }))
         .pipe(dest('build/js'))
-}
-
-const buildCustomJs = () => {
-    return src('./src/pages/**/script.js')
-        .pipe(include())
-            .on('error', console.log)
-        .pipe(babel({
-            compact: false,
-            presets: [
-                ['@babel/preset-env']
-            ]
-        }))
-        .pipe(uglify())
-        .pipe(rename(fileObj => {
-            fileObj.basename = fileObj.dirname + '.min';
-            fileObj.dirname = '';
-        }))
-        .pipe(dest('build/js/pages'))
 }
 
 const buildHmtl = () => {
@@ -343,23 +150,13 @@ const server = () => {
     browserSync.init({
         server: {
             baseDir: './build'
-        },
-        // port: 7000
+        }
     })
 }
 
 // Watchers
-watch('./mocks/**/*', devMocksData)
-watch('./src/vendor/scss/**/*.scss', devVendorCss)
-watch('./src/scss/**/*.scss', devCommonCss)
-watch('./src/template/**/*.scss', devCommonCss)
-watch('./src/components/**/*.scss', devCommonCss)
-watch('./src/pages/**/*.scss', devCustomCss)
-watch('./src/vendor/js/**/*.js', devVendorJs)
-watch('./src/js/**/*.js', devCommonJs)
-watch('./src/template/**/*.js', devCommonJs)
-watch('./src/components/**/*.js', devCommonJs)
-watch('./src/pages/**/*.js', devCustomJs)
+watch('./src/**/*.scss', devCommonCss)
+watch('./src/**/*.js', devCommonJs)
 watch('./src/**/*.pug', devHmtl)
 
 // Project development mode
@@ -367,13 +164,8 @@ exports.default = series(
     clean,
     setEnv,
     parallel(
-        devMocksData,
-        devVendorCss,
         devCommonCss,
-        devCustomCss,
-        devVendorJs,
         devCommonJs,
-        devCustomJs,
         devHmtl
     ),
     server
@@ -383,13 +175,8 @@ exports.default = series(
 exports.build = series(
     clean,
     parallel(
-        buildMocksData,
-        buildVendorCss,
         buildCommonCss,
-        buildCustomCss,
-        buildVendorJs,
         buildCommonJs,
-        buildCustomJs,
         buildHmtl
     ),
     function buildDone(done) {

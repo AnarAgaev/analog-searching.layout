@@ -1,9 +1,9 @@
 {
-  "name": "technolight.layout",
+  "name": "analog-searching.layout",
   "version": "1.0.0",
-  "description": "Фронт-енд для новой версии сайта technolight",
+  "description": "Analog Searching Demo Layout",
   "main": "index.js",
-  "author": "Andrey Stepanenko <info@bustep.ru>, Anar Agaev <anar.n.agaev@gmail.com>",
+  "author": "Anar Agaev <anar.n.agaev@gmail.com>",
   "license": "ISC",
   "scripts": {
     "dev": "gulp",
@@ -34,13 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AnarAgaev/technolight.layout"
+    "url": "https://github.com/AnarAgaev/analog-searching.layout"
   },
   "bugs": {
-    "url": "https://github.com/AnarAgaev/technolight.layout/issues"
-  },
-  "figma": {
-    "url": "https://www.figma.com/files/project/108880214/TECHNOLIGHT_2023?fuid=785909414921117791"
+    "url": "https://github.com/AnarAgaev/analog-searching.layout/issues"
   },
   "browserslist": [
     "last 2 version",

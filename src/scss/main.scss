@@ -1,3 +1,11 @@
 @import 'fonts';
 @import 'css-variables';
 @import 'default';
+@import '../pages/index/style.scss';
+
+// Components
+@import '../pages/index/components/search-form/style';
+@import '../pages/index/components/res-msg/style';
+@import '../pages/index/components/examples/style';
+@import '../pages/index/components/uploading/style';
+@import '../pages/index/components/results/style';

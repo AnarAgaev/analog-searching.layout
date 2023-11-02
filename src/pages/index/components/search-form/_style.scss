@@ -1,0 +1,255 @@
+@import '../../../../scss/sass-variables';
+
+.asd {
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: calc(var(--base-offset) * 2);
+        width: 100%;
+    }
+
+    &__form-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: var(--base-offset);
+        width: 100%;
+    }
+
+    [data-type-target] {
+        display: none;
+
+        &.visible {
+            display: flex;
+        }
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--base-offset) * 2);
+        width: 100%;
+        height: auto;
+
+        mark {
+            display: block;
+            position: relative;
+            background: transparent;
+        }
+
+        input {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: calc(var(--base-offset) * 5);
+            padding: 0 calc(var(--base-offset) * 2);
+            border-radius: 7px;
+            border: 1px solid var(--color-border);
+            background: var(--color-secondary);
+            font-size: 18px;
+            outline: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &__res-count {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--base-offset);
+        max-width: 40%;
+        height: calc(var(--base-offset) * 5);
+        padding: 0 calc(var(--base-offset) * 2);
+        border-radius: 7px;
+        border: 1px solid var(--color-border);
+        background: var(--color-tabs-back);
+
+        &.invisible {
+            display: none;
+        }
+
+        mark {
+            display: block;
+            background: transparent;
+            width: 100%;
+            outline: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        span {
+            flex-shrink: 0;
+            display: block;
+            position: relative;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+
+            @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    &::before, &::after {
+                        background-color: var(--color-accent);
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &::before, &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 2px;
+                height: 18px;
+                background-color: var(--color-primary);
+                opacity: 0.6;
+                transition: var(--base-transition);
+            }
+
+            &::before {
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+
+            &::after {
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+        }
+    }
+
+    &__buttons-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: calc(var(--base-offset) * 2);
+        width: 100%;
+    }
+
+    &__select {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: calc(var(--base-offset) * 5);
+
+        &.dropped {
+            z-index: 1;
+
+            .select-value {
+                border-radius: 7px 7px 0 0;
+                border: 1px solid var( --color-tabs-border);
+                border-bottom: none;
+                background: var(--color-select-back);
+
+                i {
+                    transform: scale(1, -1);
+                }
+            }
+
+            .select-options {
+                display: block;
+            }
+        }
+
+        ul ul {
+            .value {
+                padding-left: calc(var(--base-offset) * 4);
+                font-size: 0.95em;
+            }
+        }
+
+        ul ul ul {
+            .value {
+                padding-left: calc(var(--base-offset) * 6);
+                font-size: 0.9em;
+            }
+        }
+
+        ul ul ul ul {
+            .value {
+                padding-left: calc(var(--base-offset) * 8);
+                font-size: 0.85em;
+            }
+        }
+
+        .select-value {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0 calc(var(--base-offset) * 2);
+            border-radius: 7px;
+            border: 1px solid var(--color-border);
+            background: var(--color-secondary);
+            font-size: 18px;
+            outline: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+
+            i {
+                display: block;
+                width: 24px;
+                height: 24px;
+                background: transparent no-repeat center;
+                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIyIDlMMTIgMTlMMiA5IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEuNjY2NjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
+            }
+        }
+
+        .select-options {
+            display: none;
+            border-radius: 0 0 7px 7px;
+            border: 1px solid var( --color-tabs-border);
+            background: var(--color-select-back);
+            padding: calc(var(--base-offset) * 2) 0;
+        }
+
+        &-list {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+        }
+
+        &-item {
+            display: flex;
+            flex-direction: column;
+
+            input:checked + .value {
+                background: var(--color-tabs-border);
+                cursor: default;
+                pointer-events: none;
+            }
+
+            .value {
+                display: block;
+                width: 100%;
+                padding: 6px calc(var(--base-offset) * 2);
+                cursor: pointer;
+                transition: var(--base-transition);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                &.active {
+                    background: var(--color-tabs-border);
+                    cursor: default;
+                    pointer-events: none;
+                }
+
+                @media (hover: hover) and (pointer: fine) {
+                    &:hover {
+                        background: var(--color-tabs-border);
+                    }
+                }
+            }
+        }
+    }
+}

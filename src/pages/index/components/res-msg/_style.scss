@@ -1,0 +1,14 @@
+.res-msg {
+    display: block;
+    margin-top: calc(var(--base-offset) * 4);
+    margin-bottom: calc(var(--base-offset) * 2);
+
+    p {
+        font-size: 18px;
+        font-weight: 500;
+
+        span {
+            font-weight: 400;
+        }
+    }
+}

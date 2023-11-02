@@ -12,10 +12,63 @@ html(lang="ru")
         link(rel="icon" type="image/png" href="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=")
 
         link(rel='preload', href='css/main.css', as='style')
-        link(rel='stylesheet', href='css/vendor.css')
+        link(rel='stylesheet', href='css/main.css')
+
+        if process.env.NODE_ENV === 'dev'
+            link(rel='preload', href='css/main.css', as='style')
+            link(rel='stylesheet', href='css/main.css')
+        else
+            link(rel='preload', href='css/main.min.css', as='style')
+            link(rel='stylesheet', href='css/main.min.css')
+
+
+
+    // style не переносим!
+    style.
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
     body
         .container
-            h1 Hello world!
+            .asd
+                .asd__wrap
+                    h1.asd__title Попробовать поиск товара по фотографии
 
-        script(src=`js/pages/${page}.min.js` defer)
+                    .asd__tubs-types
+                        button.active(type="button" data-type="code") Поиск по артикулу
+                        button(type="button" data-type="url") Поиск по url
+                        button(type="button" data-type="image") Поиск по фото
+
+                    .asd__container
+                        .asd__column
+                            include components/search-form/search-form
+
+                        .asd__column
+                            include components/feed-form/feed-form
+
+                    include components/res-msg/res-msg
+
+                    .asd__container
+                        .asd__column
+                            include components/info/info
+
+                        .asd__column
+                            include components/warning/warning
+                            include components/uploading/uploading
+
+                    .asd__container
+                        .asd__column
+                            include components/examples/examples
+
+                .asd__wrap
+                    h1.asd__title Результаты поиска
+                    include components/results/results
+
+
+        if process.env.NODE_ENV === 'dev'
+            script(src='js/main.js' defer)
+        else
+            script(src='js/main.min.js' defer)

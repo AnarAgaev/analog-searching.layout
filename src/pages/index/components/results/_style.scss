@@ -1,0 +1,90 @@
+@import '../../../../scss/sass-variables';
+
+.results {
+    &__list {
+        display: grid;
+        // grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: calc(var(--base-offset) * 2);
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding: var(--base-offset);
+        background: var(--color-secondary);
+        border-radius: var(--base-offset);
+        height: 100%;
+        user-select: none;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                &::before, &::after {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &::after {
+            content: 'Cмотреть аналоги';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            font-weight: 700;
+            color: var(--color-primary);
+            background: rgba(255,255,2556, 0.4);
+            backdrop-filter: blur(2px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: var(--base-transition);
+        }
+
+        &.selected {
+            background: var(--color-card-back);
+            pointer-events: none;
+
+            * {
+                color: var(--color-secondary);
+            }
+        }
+    }
+
+    &__pic {
+        display: block;
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        margin-bottom: var(--base-offset);
+        border-radius: calc(var(--base-offset) / 2);
+        overflow: hidden;
+    }
+
+    &__title {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        margin-bottom: calc(var(--base-offset) / 2);
+        color: var(--color-lite);
+    }
+
+    &__text {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        font-size: 14px;
+        max-height: 34px;
+    }
+}

@@ -1,0 +1,49 @@
+form(action="").asd__form
+
+    .asd__form-group
+        label.asd__label.asd__label_select
+            mark Выберите один из тестовых фидов
+
+            // Тоглим список через класс .dropped
+            .asd__select
+                .select-value
+                    span(data-default-value="Все фиды") Все фиды
+                    i
+                .select-options
+                    ul.asd__select-list
+                        li.asd__select-item
+                            label
+                                input.invisible(type='reset')
+                                span.value Все фиды
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                // Выделяем span с помощью класса active
+                                span.value mk.allconsoles.ru
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value dealer.denkirs.ru
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value fandeco.ru
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value satro-paladin.com
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value vashdommebel.ru
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value swgshop.ru
+
+
+    label.asd__label.asd__label_text
+        mark Добавить свою выгрузку
+        input(placeholder="URL фида в формате YML")
+
+    button.btn.btn_lite(type="button") Добавить

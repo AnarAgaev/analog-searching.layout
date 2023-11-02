@@ -1,14 +1,18 @@
 :root {
     --base-transition: all .1s linear;
-    --synth-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 
     --font-family: 'Inter', sans-serif;
 
     --color-primary: #000;
     --color-secondary: #fff;
+    --color-lite: #717178;
     --color-accent: #2158E2;
     --color-back: #edf5fe;
     --color-border: #d8e5fb;
+    --color-tabs-border: #e0e0e3;
+    --color-card-back: #56668d;
+    --color-select-back: #f5f5f5;
+    --color-tabs-back: rgba(255, 255, 255, 0.15);
 
     --base-offset: 10px;
 }

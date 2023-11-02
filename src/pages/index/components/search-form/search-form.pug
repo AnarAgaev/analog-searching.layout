@@ -1,0 +1,103 @@
+form(action="").asd__form
+    .asd__form-group
+        label.asd__label.asd__label_text.visible(data-type-target="code")
+            mark Укажите Артикул товара
+            input(placeholder="vendor code из фида")
+
+        label.asd__label.asd__label_text(data-type-target="url")
+            mark Укажите URL товара
+            input(placeholder="https://example.com")
+
+        label.asd__label.asd__label_text(data-type-target="image")
+            mark Выберите картинку
+            input(placeholder="")
+
+        // Отключить бэйджим можно с помощью класса .invisible
+        div.asd__res-count
+            mark A5090LM-5WG
+            span
+
+    .asd__form-group
+        label.asd__label.asd__label_select
+            mark Выберите категорию, в которой осуществлять поиск
+
+            .asd__select
+                .select-value
+                    span(data-default-value="Все категории") Все категории
+                    i
+                .select-options
+                    ul.asd__select-list
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                // Выделяем span с помощью класса active
+                                span.value Настольные лампы и ночники
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value Офисное освещение
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value Уличное освещение
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value Подсветки
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value Споты
+
+                            ul.asd__select-list
+                                li.asd__select-item
+                                    label
+                                        input.invisible(type='radio' name='temp' value='')
+                                        span.value Элемент вложееного списка
+                                li.asd__select-item
+                                    label
+                                        input.invisible(type='radio' name='temp' value='')
+                                        span.value Элемент вложееного списка
+                                li.asd__select-item
+                                    label
+                                        input.invisible(type='radio' name='temp' value='')
+                                        span.value Элемент вложееного списка
+
+                                        ul.asd__select-list
+                                            li.asd__select-item
+                                                label
+                                                    input.invisible(type='radio' name='temp' value='')
+                                                    span.value Элемент вложееного списка
+                                            li.asd__select-item
+                                                label
+                                                    input.invisible(type='radio' name='temp' value='')
+                                                    span.value Элемент вложееного списка
+                                            li.asd__select-item
+                                                label
+                                                    input.invisible(type='radio' name='temp' value='')
+                                                    span.value Элемент вложееного списка
+
+                                                    ul.asd__select-list
+                                                        li.asd__select-item
+                                                            label
+                                                                input.invisible(type='radio' name='temp' value='')
+                                                                span.value Элемент вложееного списка
+                                                        li.asd__select-item
+                                                            label
+                                                                input.invisible(type='radio' name='temp' value='')
+                                                                span.value Элемент вложееного списка
+                                                        li.asd__select-item
+                                                            label
+                                                                input.invisible(type='radio' name='temp' value='')
+                                                                span.value Длинный текст в любом из пунктов будет обрезаться и будут добавляться три точки
+                        li.asd__select-item
+                            label
+                                input.invisible(type='radio' name='temp' value='')
+                                span.value Торшеры
+
+
+
+
+    .asd__buttons-wrap
+        button.btn.btn_block.btn_base(type="button") Искать
+        button.btn.btn_block.btn_reset(type="reset") Сбросить

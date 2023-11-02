@@ -1,0 +1,85 @@
+@import '../../scss/sass-variables';
+
+.asd {
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+        padding: calc(var(--base-offset) * 6) calc(var(--base-offset) * 12);
+        background-color: var(--color-back);
+        border-radius: calc(var(--base-offset) * 2);
+        margin-bottom: calc(var(--base-offset) * 4);
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: calc(var(--base-offset) * 2);
+        width: 100%;
+        height: auto;
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--base-offset) * 2);
+        width: 100%;
+        min-width: 0;
+        height: auto;
+    }
+
+    &__title {
+        font-size: 54px;
+        font-weight: 700;
+        margin-bottom: calc(var(--base-offset) * 6);
+        text-align: center;
+
+        @media (min-width: $xxl) {
+            margin-right: -10px;
+        }
+    }
+
+    &__tubs-types {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--base-offset);
+        margin-bottom: calc(var(--base-offset) * 6);
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: calc(var(--base-offset) * 5);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 999px;
+            border: 1px solid var(--color-tabs-border);
+            background: var(--color-tabs-back);
+            padding-left: calc(var(--base-offset) * 3);
+            padding-right: calc(var(--base-offset) * 3);
+            cursor: pointer;
+            transition: var(--base-transition);
+            user-select: none;
+
+            &.active {
+                background-color: var(--color-secondary);
+                cursor: default;
+                pointer-events: none;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    border-color: var(--color-border);
+                    background-color: var(--color-secondary);
+                }
+            }
+
+        }
+    }
+}
