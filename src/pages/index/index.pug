@@ -73,7 +73,12 @@ html(lang="ru")
                         h3.modal__title
                         p.modal__text
                         span.modal__line
-                        button.modal__close(type="button") Закрыть
+                        button.close(type="button") Закрыть
+
+                .modal.modal_example.hidden#asdModalExample
+                    .modal__body
+                        img.modal__pic(src="" alt="")
+                        button.close(type="button")
 
         if process.env.NODE_ENV === 'dev'
             script(src='js/main.js' defer)

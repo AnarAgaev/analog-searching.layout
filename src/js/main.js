@@ -1,5 +1,32 @@
-const hideAsdModal = () => {
-    const modal = document.getElementById('asdModal')
+function smoothScrollTo(position, duration = 500) {
+    const startPosition = window.pageYOffset
+    const distance = position - startPosition
+    let startTimestamp = null
+
+    function step(timestamp) {
+        if (!startTimestamp) startTimestamp = timestamp
+
+        const progress = timestamp - startTimestamp
+        const scrollY = easeInOutCubic(progress, startPosition, distance, duration)
+
+        window.scrollTo(0, scrollY)
+
+        if (progress < duration) {
+            window.requestAnimationFrame(step)
+        }
+    }
+
+    function easeInOutCubic(t, b, c, d) {
+        t /= d
+        t--
+        return c * (t * t * t + 1) + b
+    }
+
+    window.requestAnimationFrame(step)
+}
+
+const hideModal = (id) => {
+    const modal = document.getElementById(id)
     modal.classList.remove('visible')
 
     setTimeout(() => {
@@ -7,19 +34,22 @@ const hideAsdModal = () => {
     }, 100)
 }
 
-const showAsdModal = (title, text) => {
-    const modal = document.getElementById('asdModal')
-    const close = modal.querySelector('.modal__close')
+const showModal = (id, title, text) => {
+    const modal = document.getElementById(id)
+    const close = modal.querySelector('.close')
 
-    modal.querySelector('.modal__title').innerText = title
-    modal.querySelector('.modal__text').innerText = text
+    if (title && text) {
+        modal.querySelector('.modal__title').innerText = title
+        modal.querySelector('.modal__text').innerText = text
+    }
+
     modal.classList.remove('hidden')
 
     setTimeout(() => {
         modal.classList.add('visible')
     }, 100)
 
-    close.addEventListener('click', hideAsdModal)
+    close.addEventListener('click', () => hideModal(id))
 }
 
 const initTypeTubs = () => {
@@ -151,10 +181,22 @@ const initUploadUserFid = () => {
         if (input.value === '') {
             e.stopPropagation()
             e.preventDefault()
-            showAsdModal(modalTitle, modalText)
+            showModal('asdModal', modalTitle, modalText)
             return
         }
 
+        console.log('Ajax запрос загрузка пользовательского фида');
+        const targetPlace = document.querySelector('.warning')
+
+        setTimeout(() => {
+            const rect = targetPlace.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetPlaceTop = rect.top + scrollTop;
+            smoothScrollTo(targetPlaceTop)
+        }, 100)
+
+        // Демострация вью асинхоронного обновления статуса проверки Фида
+        // Нужно переписать на WebSocets после добавления API загрузки
         statuses.forEach((el, idx) => {
             setInterval(() => {
                 el.classList.remove('hidden')
@@ -193,10 +235,15 @@ const initToggleColumns = () => {
 }
 
 const asdShowResults = () => {
-    const results = document.getElementById('results')
-
+    const results = document.getElementById('results');
     results.classList.remove('hidden')
 
+    setTimeout(() => {
+        const rect = results.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const resultsTop = rect.top + scrollTop;
+        smoothScrollTo(resultsTop)
+    }, 100)
 }
 
 const initSearchAnalogButton = () => {
@@ -205,31 +252,32 @@ const initSearchAnalogButton = () => {
     const checkCode = () => {
         const input = document.getElementById('asdInputCode')
         if (input.value === '') {
-            showAsdModal('Ошибка', 'Вы не указали Артикул товара')
+            showModal('asdModal', 'Ошибка', 'Вы не указали Артикул товара')
             return
         }
-        asdShowResults()
+        console.log('Ajax запрос товаров по Артикулу');
+        return true
     }
 
     const checkUrl = () => {
         const input = document.getElementById('asdInputUrl')
         if (input.value === '') {
-            showAsdModal('Ошибка', 'Вы не указали URL товара')
+            showModal('asdModal', 'Ошибка', 'Вы не указали URL товара')
             return
         }
-        asdShowResults()
+        console.log('Ajax запрос товаров по URL');
+        return true
     }
 
     const checkiImage = () => {
         const input = document.getElementById('asdInputfile')
 
         if(input.files.length === 0) {
-            if (input.value === '') {
-                showAsdModal('Ошибка', 'Вы не добавили изображение для поиска')
-                return
-            }
-            asdShowResults()
+            showModal('asdModal', 'Ошибка', 'Вы не добавили изображение для поиска')
+            return
         }
+        console.log('Ajax запрос товаров по картинке');
+        return true
     }
 
     btn.addEventListener('click', () => {
@@ -250,9 +298,26 @@ const initSearchAnalogButton = () => {
         }
 
         if (cehckingResult) {
-
+            asdShowResults()
         }
     })
+}
+
+const initShowExamples = () => {
+    const btns = Array.from(document.querySelectorAll('.asd .examples__link'))
+
+    btns.forEach(el => el.addEventListener('click', function() {
+        const src = this.dataset.src
+        const modal = document.getElementById('asdModalExample')
+        const img = modal.querySelector('.modal__pic')
+        img.src = src
+
+        showModal('asdModalExample')
+
+
+
+        console.log(img);
+    }))
 }
 
 window.addEventListener('load', () => {
@@ -265,4 +330,5 @@ window.addEventListener('load', () => {
     initUploadUserFid()
     initToggleColumns()
     initSearchAnalogButton()
+    initShowExamples()
 })
