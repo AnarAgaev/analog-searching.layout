@@ -313,10 +313,6 @@ const initShowExamples = () => {
         img.src = src
 
         showModal('asdModalExample')
-
-
-
-        console.log(img);
     }))
 }
 
