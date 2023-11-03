@@ -133,10 +133,12 @@ const initResetForms = () => {
         el.addEventListener('click', function() {
             const form = this.closest('.asd .asd__form')
             const values = Array.from(form.querySelectorAll('.asd [data-default-value]'))
+            const resetImgBtn = form.querySelector('.asd__file-input button')
             values.forEach(el => {
                 const defaultValue = el.dataset.defaultValue
                 el.innerText = defaultValue
             })
+            resetImgBtn.classList.add('hidden')
         })
     })
 }
@@ -160,7 +162,7 @@ const initCustomInputFile = () => {
 
     reset.addEventListener('click', () => {
         fileInput.value = ''
-        fileName.textContent= ''
+        fileName.textContent= 'Файл не выбран'
         reset.classList.add('hidden')
     })
 }
