@@ -143,7 +143,8 @@ const initResetForms = () => {
 
 const initCustomInputFile = () => {
     const fileInput = document.getElementById('asdInputfile')
-    const fileName = document.querySelector('.asd__file-input span')
+    const fileName = document.querySelector('.asd .asd__file-input span')
+    const reset = document.querySelector('.asd .asd__file-input button')
 
     fileInput.addEventListener('change', function() {
         const file = this.files[0]
@@ -151,14 +152,21 @@ const initCustomInputFile = () => {
 
         if (allowedExtensions.test(file.name)) {
             fileName.textContent = file.name
+            reset.classList.remove('hidden')
         } else {
             fileName.textContent = 'Неверный формат файла'
         }
     })
+
+    reset.addEventListener('click', () => {
+        fileInput.value = ''
+        fileName.textContent= ''
+        reset.classList.add('hidden')
+    })
 }
 
 const initToggleUseFeed = () => {
-    const button = document.querySelector('.asd__feed-selector .points')
+    const button = document.querySelector('.asd__feed-selector .toggler')
     const selector = button.closest('.asd__feed-selector')
     const warning = document.querySelector('.warning')
     const uploading = document.querySelector('.uploading')
