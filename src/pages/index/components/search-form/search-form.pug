@@ -12,7 +12,7 @@ form(action="").asd__form
             mark Загрузите фото товара
 
             .asd__file-input
-                input#asdInputfile.invisible(type='file' name="image" accept=".jpg, .jpeg, .png, .webp")
+                input#asdInputfile.invisible(type='file' name="image" accept=".jpg, .jpeg, .png, .webp" capture="environment")
                 label(for='asdInputfile') Выберите файл
                 span(data-default-value="Файл не выбран") Файл не выбран
                 button(type="button" title="Удалить картинку").hidden
